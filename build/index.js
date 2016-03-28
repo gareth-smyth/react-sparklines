@@ -234,9 +234,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function shouldComponentUpdate(nextProps) {
 	            var _this2 = this;
 
-	            return nextProps.width != this.props.width || nextProps.height != this.props.height || nextProps.margin != this.props.margin || nextProps.min != this.props.min || nextProps.max != this.props.max || nextProps.limit != this.props.limit || nextProps.data.length != this.props.data.length || nextProps.data.some(function (d, i) {
+	            return nextProps.width != this.props.width || nextProps.height != this.props.height || nextProps.containerWidth != this.props.containerWidth || nextProps.containerHeight != this.props.containerHeight || nextProps.margin != this.props.margin || nextProps.min != this.props.min || nextProps.max != this.props.max || nextProps.limit != this.props.limit || nextProps.data.length != this.props.data.length || nextProps.data.some(function (d, i) {
 	                return d !== _this2.props.data[i];
-	            });
+	            }) || nextProps.preserveAspectRatio != this.props.preserveAspectRatio;
 	        }
 	    }, {
 	        key: 'render',
@@ -246,10 +246,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var limit = _props.limit;
 	            var width = _props.width;
 	            var height = _props.height;
+	            var containerWidth = _props.containerWidth;
+	            var containerHeight = _props.containerHeight;
 	            var margin = _props.margin;
 	            var style = _props.style;
 	            var max = _props.max;
 	            var min = _props.min;
+	            var preserveAspectRatio = _props.preserveAspectRatio;
 
 
 	            if (data.length === 0) return false;
@@ -258,7 +261,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.createElement(
 	                'svg',
-	                { width: width, height: height, style: style, viewBox: '0 0 ' + width + ' ' + height },
+	                { width: containerWidth, height: containerHeight, style: style,
+	                    viewBox: '0 0 ' + width + ' ' + height, preserveAspectRatio: preserveAspectRatio },
 	                _react2.default.Children.map(this.props.children, function (child) {
 	                    return _react2.default.cloneElement(child, { points: points, width: width, height: height, margin: margin });
 	                })
@@ -274,15 +278,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    limit: _react2.default.PropTypes.number,
 	    width: _react2.default.PropTypes.number,
 	    height: _react2.default.PropTypes.number,
+	    containerWidth: _react2.default.PropTypes.string,
+	    containerHeight: _react2.default.PropTypes.string,
 	    margin: _react2.default.PropTypes.number,
 	    style: _react2.default.PropTypes.object,
 	    min: _react2.default.PropTypes.number,
-	    max: _react2.default.PropTypes.number
+	    max: _react2.default.PropTypes.number,
+	    preserveAspectRatio: _react2.default.PropTypes.string
 	};
 	Sparklines.defaultProps = {
 	    data: [],
 	    width: 240,
 	    height: 60,
+	    containerWidth: "240",
+	    containerHeight: "60",
+	    preserveAspectRatio: "xMidYMid meet",
 	    margin: 2
 	};
 	exports.Sparklines = Sparklines;
